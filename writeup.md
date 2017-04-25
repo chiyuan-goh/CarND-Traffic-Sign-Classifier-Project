@@ -26,11 +26,12 @@ The goals / steps of this project are the following:
 
 
 ## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
-###Data Set Summary & Exploration
+### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
-####1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
+### Data Set Summary & Exploration
+
+#### 1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
 I used the numpy library to calculate summary statistics of the traffic
 signs data set:
@@ -41,15 +42,15 @@ signs data set:
 * The shape of a traffic sign image is 32 by 32 by 3
 * The number of unique classes/labels in the data set is 43
 
-####2. Include an exploratory visualization of the dataset.
+#### 2. Include an exploratory visualization of the dataset.
 
 Here is an exploratory visualization of the data set. It is a bar chart showing the class distribution of the dataset. Overall, we can observe that the class distributions are not evenly distributed, with low numbers in classes such as "20km/h Speed limit" (Class 0) and high in e.g Yield (class 13). This is likely due to the availability of such signs in real life i.e there are very little areas in Germany where the speed limit is indeed 20km/h. However, this distribution is fairly consistent across the test, validation and training dataset, hence it is likely that they are sampled in a stratified manner.
 
 ![alt text][classd]
 
-###Design and Test a Model Architecture
+### Design and Test a Model Architecture
 
-####1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
+#### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
 As a first step, we decided to convert the images to grayscale. This decision is emprical; for the same baseline model, a slightly better performance ~1.5%. Since the number of weights to learn is smaller for grayscale inputs, we have stuck to this.
 
@@ -60,7 +61,7 @@ Here is an example of a traffic sign image before and after grayscaling/noraliza
 As a last step, I normalized the image data, subtracting each pixel by an approximate mean of 128. and dividing by approximate standard deviation of 128, in order to control the input values to similar ranges so that gradients wouldn't be dominated by overly large values during backpropagation training.
 
 
-####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
+#### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
 My final model consisted of the following layers:
 
@@ -82,11 +83,11 @@ My final model consisted of the following layers:
  
 
 
-####3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
+#### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
 To train the model, I used Tensorflow's tf.nn.AdamOptmizer which is a variant of SGD that adjusts the learning rate. Batch size is fixed untuned at 128, and the learning rate is set to 0.001. There were some [pro-tips](http://machinelearningmastery.com/dropout-regularization-deep-learning-models-keras/) that advises applying dropout and increasing learning rate by a large factor, but it was observed that the validation and training accuracy swing wildly between iterations. Number of epochs started at 10 and seemingly converge around ~60 for the hyperparameters and architectures experimented. We did not observe overfitting from 10 - 60.
 
-####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
+#### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
 
@@ -120,9 +121,9 @@ If a well known architecture was chosen:
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
  
 
-###Test a Model on New Images
+### Test a Model on New Images
 
-####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
+#### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
 Here are five German traffic signs that I found on the web. These are chosen on the basis of testing the limits of the network i.e they exhibit certain qualities that the training data do not possess:
 
@@ -148,7 +149,7 @@ This is a bumpy road sign. It is heavily scaled up and occluded.
 This is a No Entry sign. The words "Do Not Enter" are added to the sign.
 ![alt text][image2]
 
-####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
+#### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
 Here are the results of the prediction:
 
@@ -165,7 +166,7 @@ The model was able to correctly predict 1/5 samples, which gives an accuracy of 
 
 It is interesting that for the No Entry sample, the network is ~100% confident of its prediction despite its distortion. Even more notable is that even though the predictions are incorrect for Bumpy Road, 30km/h and Road Works, the network is equally confident. This seemingly suggested that the network is intolerable to scale, perspective rotational transformation.
 
-####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
+#### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
 The code for making predictions on my final model is located in the 11th cell #TODO of the Ipython notebook.
 
